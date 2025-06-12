@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+body {
+  background-color: hsl(0, 0%, 15%); 
+  color: hsl(220, 14%, 97%);
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  background-color: black;
+}
+
+
+.todo-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+
+.todo-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.todo-container li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border: 1px solid #444;
+  background-color: #2a2a2a;
+  padding: 1rem;
+  border-radius: 6px;
+}
+
+
+.todo-container li .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.todo-container li .bottom {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  align-items: center;
+}
+
+.todo-container input[type="checkbox"] {
+  transform: scale(1.2);
+}
+
+.todo-container button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+
+@media (max-width: 500px) {
+  .todo-container li {
+    padding: 0.75rem;
+  }
+
+  .todo-container li .top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .todo-container li .bottom {
+    justify-content: space-between;
+  }
+}

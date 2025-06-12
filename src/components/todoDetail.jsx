@@ -1,0 +1,33 @@
+import { useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+
+export default function TodoDetail() {
+  const { id } = useParams();
+
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["todo", id],
+    queryFn: async () => {
+      const res = await axios.get(`https://jsonplaceholder.typicode.com/todos/${id}`);
+      return res.data;
+    },
+  });
+
+  if (isLoading) return <p>Loading todo detail...</p>;
+  if (isError) return <p>Error: {error.message}</p>;
+
+
+  return (
+    <div className="p-4">
+      <h1 className="text-2xl font-bold mb-2">Todo Detail</h1>
+      <p><strong>ID:</strong> {data.id}</p>
+      <p><strong>Title:</strong> {data.title}</p>
+      <p>
+        <strong>Status:</strong>{" "}
+        <span className={data.completed ? "text-green-600" : "text-red-500"}>
+          {data.completed ? "Completed" : "Incomplete"}
+        </span>
+      </p>
+    </div>
+  );
+}
