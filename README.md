@@ -1,12 +1,24 @@
-# React + Vite
+# Todo App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple React Todo app using Tanstack Query, Axios, and pagination.
 
-Currently, two official plugins are available:
+## Features
+- View, add, update, and delete todos
+- Pagination (10 todos per page)
+- Accessible and mobile-friendly layout
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
+- React
+- React Router
+- React Query
+- Axios
+- JSONPlaceholder API
 
-## Expanding the ESLint configuration
+## Setup
+```bash
+npm install
+npm run dev
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Challenges
+- updating the todo list to display changes
+since the API only returns the same ToDo even after updating, I had to directly pass the result inside the function but the changes only appear when the page is not getting refreshed. As soon as the page gets refreshed, the page gets updated to display the same data from the API over and over 
