@@ -4,7 +4,7 @@ import { useState } from "react";
 import Pagination from "./pagination";
 import { Link } from 'react-router-dom';
 import AddTodo from './addtodo';    
-import { Trash } from "lucide-react";
+import { Edit, Trash } from "lucide-react";
 
 
 
@@ -17,6 +17,9 @@ export default function Todos() {
 
     const queryClient = useQueryClient();
 
+    const [editingId, setEditingId] = useState(null);
+    const [editTitle, setEditTitle] = useState("");
+
 
     const updateTodo = useMutation({
   mutationFn: (updatedTodo) =>
@@ -24,8 +27,14 @@ export default function Todos() {
       `https://jsonplaceholder.typicode.com/todos/${updatedTodo.id}`,
       updatedTodo
     ),
-  onSuccess: () => {
-    queryClient.invalidateQueries(["todos"]);
+  onSuccess: (response) => {
+    const updated = response.data; 
+
+    queryClient.setQueryData(["todos"], (oldTodos) =>
+      oldTodos.map((todo) =>
+        todo.id === updated.id ? { ...todo, ...updated } : todo
+      )
+    );
   },
 });
 
@@ -64,6 +73,43 @@ const deleteTodo = useMutation({
       <ul className="space-y-2 max-w-xl mx-auto">
       {currentTodos.map((todo) => (
        <li key={todo.id} className="border p-2 rounded">
+         {editingId === todo.id ? (
+     <div className="flex justify-between items-center gap-2">
+     <input
+  type="text"
+  value={editTitle}
+  onChange={(e) => setEditTitle(e.target.value)}
+  onKeyDown={(e) => {
+    if (e.key === 'Enter') {
+      updateTodo.mutate({ ...todo, title: editTitle });
+      setEditingId(null);
+    } else if (e.key === 'Escape') {
+      setEditingId(null); // Cancel editing
+    }
+  }}
+  className="border px-2 py-1 rounded w-full"
+/>
+
+    <button
+      disabled={updateTodo.isLoading}
+      onClick={() => {
+        updateTodo.mutate({ ...todo, title: editTitle });
+        setEditingId(null);
+      }}
+      className="text-green-600 text-sm disabled:opacity-50"
+    >
+        {updateTodo.isLoading ? "Saving..." : "Save"}
+
+    </button>
+    <button
+      onClick={() => setEditingId(null)}
+      className="text-gray-500 text-sm"
+    >
+      Cancel
+    </button>
+  </div>
+) : (
+
         <div className="flex justify-between items-center">
         
         <div>
@@ -82,18 +128,33 @@ const deleteTodo = useMutation({
           <input
             type="checkbox"
             checked={todo.completed}
+            aria-label="Toggle Todo Completion"
             onChange={() =>
               updateTodo.mutate({ ...todo, completed: !todo.completed })
             }
           />
+
+           <Edit
+         onClick={() => {
+          setEditingId(todo.id);
+          setEditTitle(todo.title);
+        }}
+        className="text-blue-500 cursor-pointer w-5 h-5 hover:text-blue-700"
+        size={18}
+        aria-label="Edit Todo"
+      />
+
+
           <Trash
             onClick={() => deleteTodo.mutate(todo.id)}
-            className="text-red-500 w-5 h-5 cursor-pointer hover:text-red-700-pointer"
+            className="text-red-500 w-5 h-5 cursor-pointer hover:text-red-700"
           />
             
         </div>
       </div>
+)}
     </li>
+
   ))}
 </ul>
 
