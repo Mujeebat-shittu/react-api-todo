@@ -1,9 +1,9 @@
 # Todo App
 
-A simple React Todo app using Tanstack Query, Axios, and pagination.
+Fetching a React Todo app from an API using Tanstack Query, Axios, and pagination.
 
 ## Features
-- View, add, update, and delete todos
+- View, add, update, and delete todos (the change disappears after refreshing the page)
 - Pagination (10 todos per page)
 - Accessible and mobile-friendly layout
 
@@ -12,14 +12,15 @@ A simple React Todo app using Tanstack Query, Axios, and pagination.
 - React Router
 - React Query
 - Axios
-- JSONPlaceholder API
+- JSONPlaceholder API (https://jsonplaceholder.typicode.com/)
+
+
+## Challenges
+- Updating the todo list to display changes
+since the API only returns the same ToDo even after updating. I had to directly pass the result inside the function but the changes only appear when the page is not getting refreshed. As soon as the page gets refreshed, the page gets updated to display the same data from the API over and over 
 
 ## Setup
 ```bash
 npm install
 npm run dev
 ```
-
-## Challenges
-- updating the todo list to display changes
-since the API only returns the same ToDo even after updating, I had to directly pass the result inside the function but the changes only appear when the page is not getting refreshed. As soon as the page gets refreshed, the page gets updated to display the same data from the API over and over 
