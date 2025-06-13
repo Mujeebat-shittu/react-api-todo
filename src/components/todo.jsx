@@ -117,9 +117,9 @@ const deleteTodo = useMutation({
             {todo.title}
           </Link>
           <span
-            className={todo.completed ? "text-green-600 text-sm" : "text-red-500 text-sm"}
+            className={todo.completed ? "text-green-600 text-sm" : "text-red-400 text-sm"}
           >
-            {todo.completed ? "Completed" : "Incomplete"}
+            {todo.completed ? "Completed" : "Pending..."}
           </span>
         </div>
 
@@ -170,5 +170,4 @@ const deleteTodo = useMutation({
 }
 
 //  JSONPlaceholder Todo API
-// https://jsonplaceholder.typicode.com/
 // https://jsonplaceholder.typicode.com/

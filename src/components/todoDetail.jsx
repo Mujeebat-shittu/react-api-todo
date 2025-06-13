@@ -18,14 +18,14 @@ export default function TodoDetail() {
 
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-2">Todo Detail</h1>
+    <div className="p-4 flex justify-center items-center flex-col h-screen text-center">
+      <h1 className="text-3xl font-bold mb-2">Todo Detail</h1>
       <p><strong>ID:</strong> {data.id}</p>
       <p><strong>Title:</strong> {data.title}</p>
       <p>
         <strong>Status:</strong>{" "}
-        <span className={data.completed ? "text-green-600" : "text-red-500"}>
-          {data.completed ? "Completed" : "Incomplete"}
+        <span className={data.completed ? "text-green-600" : "text-red-400"}>
+          {data.completed ? "Completed" : "Pending..."}
         </span>
       </p>
     </div>
