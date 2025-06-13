@@ -18,6 +18,7 @@ A simple React Todo app using Tanstack Query, Axios, and pagination.
 ```bash
 npm install
 npm run dev
+```
 
 ## Challenges
 - updating the todo list to display changes
