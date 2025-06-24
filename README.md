@@ -20,7 +20,7 @@ Fetching a React Todo app from an API using Tanstack Query, Axios, and paginatio
 since the API only returns the same ToDo even after updating. I had to directly pass the result inside the function but the changes only appear when the page is not getting refreshed. As soon as the page gets refreshed, the page gets updated to display the same data from the API over and over 
 
 ## Link to Live App 
-![Link to Live App](https://react-api-todo.netlify.app/)
+[Link to Live App](https://react-api-todo.netlify.app/)
 
 ## Images Displaying Features
 - An image showing the result of only completed todos after using the search filter
