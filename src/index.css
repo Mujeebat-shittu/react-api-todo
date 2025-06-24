@@ -11,6 +11,13 @@ button {
   background-color: black;
 }
 
+select {
+  background-color: hsl(0, 0%, 18%);
+  color: hsl(220, 14%, 97%);
+  border: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
 
 .todo-container {
   max-width: 600px;
