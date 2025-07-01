@@ -2,24 +2,34 @@ import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
-export default function AddTodo() {
+function AddTodo() {
   const [title, setTitle] = useState("");
   const queryClient = useQueryClient();
 
-  const mutation = useMutation({
+  const addTodo = useMutation({
     mutationFn: (newTodo) =>
       axios.post("https://jsonplaceholder.typicode.com/todos", newTodo),
-    onSuccess: () => {
-      queryClient.invalidateQueries(["todos"]); 
-      setTitle(""); // to clear input
+onSuccess: (response) => {
+      const newTodo = {
+        ...response.data,
+        id: Math.random(),
+        completed: false, 
+      };
+
+      queryClient.setQueryData(["todos"], (old = []) => [newTodo, ...old]);
+
+      setTitle("");
     },
+    
   });
+
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!title.trim()) return;
 
-    mutation.mutate({
+    addTodo.mutate({
       title,
       completed: false,
       userId: 1,
@@ -38,11 +48,12 @@ export default function AddTodo() {
       <button
         aria-label="Add Todo"
         type="submit"
-        disabled={mutation.isLoading}
+        disabled={addTodo.isLoading}
         className="bg-blue-500 text-white px-4 py-2 rounded disabled:opacity-50"
       >
-        {mutation.isLoading ? "Adding..." : "Add"}
+        {addTodo.isLoading ? "Adding..." : "Add"}
       </button>
     </form>
   );
 }
+export default AddTodo

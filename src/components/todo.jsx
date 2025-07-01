@@ -55,7 +55,7 @@ function Todos() {
     deleteTodo.mutate(id);
   };
 
-  const { data, isLoading, isError, error } = useQuery({
+  const { data: todos = [], isLoading, isError, error } = useQuery({
     queryKey: ["todos"],
     queryFn: async () => {
       const res = await axios.get("https://jsonplaceholder.typicode.com/todos");
@@ -66,7 +66,7 @@ function Todos() {
   if (isLoading) return <p>Loading todos...</p>;
   if (isError) return <p>Error: {error.message}</p>;
 
-  const todos = data || [];
+
 
   const filteredTodos = todos.filter((todo) => {
     const matchesSearch = todo.title
@@ -83,7 +83,7 @@ function Todos() {
     return matchesSearch && matchesFilter;
   });
 
-  const totalPages = Math.ceil(data.length / todosPerPage);
+  const totalPages = Math.ceil(filteredTodos.length / todosPerPage);
   const currentTodos = filteredTodos.slice(startIndex, endIndex);
 
   return (
@@ -174,7 +174,7 @@ function Todos() {
                   <div className="flex items-center space-x-3">
                     <input
                       type="checkbox"
-                      checked={todo.completed}
+                      checked={!!todo.completed}
                       aria-label="Toggle Todo Completion"
                       onChange={() =>
                         updateTodo.mutate({
