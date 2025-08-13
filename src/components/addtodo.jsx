@@ -64,7 +64,7 @@ function AddTodo() {
         >
           <dialog
             open
-            className="bg-white dark:bg-[#444] py-8 px-4 rounded-xl shadow-lg max-w-[300px] md:max-w-md  mx-auto text-gray-900 dark:text-white"
+            className="bg-white dark:bg-[#444] py-8 px-6 rounded-xl shadow-lg max-w-[300px] md:max-w-md  mx-auto text-gray-900 dark:text-white"
             onClick={(e) => e.stopPropagation()}
           >
             <form onSubmit={handleSubmit} className="">
