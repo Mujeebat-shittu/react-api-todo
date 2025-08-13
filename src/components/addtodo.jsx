@@ -64,10 +64,10 @@ function AddTodo() {
         >
           <dialog
             open
-            className="bg-white dark:bg-[#444] p-6 rounded-xl shadow-lg w-full max-w-md mx-auto text-gray-900 dark:text-white"
+            className="bg-white dark:bg-[#444] p-6 rounded-xl shadow-lg max-w-md mx-auto text-gray-900 dark:text-white"
             onClick={(e) => e.stopPropagation()}
           >
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="">
               <input
                 type="text"
                 value={title}
