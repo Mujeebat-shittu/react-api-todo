@@ -4,7 +4,8 @@ import { useState } from "react";
 import Pagination from "./pagination";
 import { Link } from "react-router-dom";
 import AddTodo from "./addtodo";
-import { Edit, Trash } from "lucide-react";
+import { Edit, Trash , LoaderCircle} from "lucide-react";
+
 
 function Todos() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -63,8 +64,10 @@ function Todos() {
     },
   });
 
-  if (isLoading) return <p>Loading todos...</p>;
-  if (isError) return <p>Error: {error.message}</p>;
+  if (isLoading) return <p className="h-screen flex items-center justify-center text-xl font-bold">
+    Loading todos &nbsp;<LoaderCircle/> </p>;
+  if (isError) return <p className="h-screen flex items-center justify-center text-xl font-bold">
+    Error: {error.message}</p>;
 
 
 

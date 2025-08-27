@@ -13,8 +13,9 @@ export default function TodoDetail() {
     },
   });
 
-  if (isLoading) return <p>Loading todo detail...</p>;
-  if (isError) return <p>Error: {error.message}</p>;
+  if (isLoading) return <p className='h-screen flex items-center justify-center text-xl font-bold'>
+    Loading todo detail...</p>;
+  if (isError) return <p className='h-screen flex items-center justify-center text-xl font-bold'>{error.message}</p>;
 
 
   return (
